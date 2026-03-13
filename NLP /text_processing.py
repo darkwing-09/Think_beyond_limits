@@ -4,7 +4,7 @@ def html_tag_rem(text):
     pattern=re.compile('<.*?>')
     return pattern.sub(r'',text)
 
-p=""" <html> <!DOCTYPE html> <html>
+para=""" <html> <!DOCTYPE html> <html>
 <body>
 <p>This is <b>bold</b> text.</p>
 <p>This is <i>italic</i> text.</p>
