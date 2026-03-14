@@ -20,3 +20,44 @@ print(html_tag_rem(p))
 ##then you can apply this function to a column of the data set like this
 df=pd.read_csv('data.csv') # reading the data set using pandas
 df['column_name']=df['column_name'].apply(html_tag_rem) # where df is the file which is being read by pandas and column_name is the name of the column which contains the text data which you want to clean from html tags.
+
+#for removing url 
+def url(text):
+    pattern=re.compile('https?://\S+|www\.\S+')
+    return pattern.sub(r'',text)
+url_text="""Hello everyone,
+
+You can visit our main website at https://www.example.com for more information. 
+If you want documentation, check http://docs.example.com/guide/start.html.
+
+Our GitHub repository is available at https://github.com/example/project and the 
+latest release notes can be found at https://github.com/example/project/releases.
+
+You may also explore learning resources at:
+www.coursera.org
+www.edx.org
+https://openai.com/research
+
+Search engines like https://www.google.com or https://duckduckgo.com are useful 
+for finding information quickly.
+
+Here are some URLs with paths and parameters:
+https://example.com/products/item?id=1024&ref=homepage
+https://blog.example.org/2024/05/ai-future.html
+https://news.site.net/article/technology?source=twitter
+
+Some short links:
+https://bit.ly/3Example
+https://tinyurl.com/samplelink
+
+FTP example:
+ftp://files.example.com/downloads/file.zip
+
+Thanks for visiting!"""
+
+print(url(url_text))
+
+df=pd.read_csv('data.csv') # reading the data set using pandas
+df['column_name']=df['column_name'].apply(url) # where df is the file which is being read by pandas and column
+
+
