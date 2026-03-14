@@ -87,3 +87,7 @@ rem_pun(para)
 
 df=pd.read_csv('data.csv') # reading the data set using pandas
 df['column_name']=df['column_name'].apply(rem_pun) # where df is the file which is being read by pandas and column
+
+#The above fun is slightly slow if we compare to old one 
+def rem_pun1(text):
+  return text.translate(str.maketrans('','',remove))
