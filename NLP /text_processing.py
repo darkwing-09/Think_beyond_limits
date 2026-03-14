@@ -62,4 +62,28 @@ print(url(url_text))
 df=pd.read_csv('data.csv') # reading the data set using pandas
 df['column_name']=df['column_name'].apply(url) # where df is the file which is being read by pandas and column
 
+# For Punctuation marks
+remove=string.punctuation
+print(remove)
 
+def rem_pun(text):
+  for char in remove:
+    text=text.replace(char,"")
+  return text
+
+para=""""
+<p>
+Technology is evolving rapidly; every day, developers learn something new. 
+Have you ever wondered how the internet works? Well, it’s a combination of 
+protocols, servers, and billions of lines of code! Programming languages 
+like Python, Java, and JavaScript help developers build applications, 
+solve problems, and innovate continuously. Remember: practice, patience, 
+and persistence are key to mastering programming.
+</p>
+
+"""
+
+rem_pun(para)
+
+df=pd.read_csv('data.csv') # reading the data set using pandas
+df['column_name']=df['column_name'].apply(rem_pun) # where df is the file which is being read by pandas and column
