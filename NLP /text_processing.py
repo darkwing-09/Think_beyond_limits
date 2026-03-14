@@ -1,5 +1,7 @@
 import re
 import pandas as pd
+import string , time
+
 def html_tag_rem(text):
     pattern=re.compile('<.*?>')
     return pattern.sub(r'',text)
