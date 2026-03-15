@@ -124,16 +124,26 @@ df.to_csv("notebook_content.csv", index=False)
 
 #for the Slangs used in during the conversation 
 slang_list = ["LOL - Laughing out loud", "LMAO - Laughing my ass off", "ROFL - Rolling on the floor laughing", "LMFAO - Laughing my freaking ass off", "BRB - Be right back", "BTW - By the way", "FYI - For your information", "IDK - I don't know", "IDC - I don't care", "IMO - In my opinion", "IMHO - In my humble opinion", "TBH - To be honest", "TBF - To be fair", "SMH - Shaking my head", "OMG - Oh my God", "OMFG - Oh my freaking God", "IKR - I know right", "TTYL - Talk to you later", "GTG - Got to go", "G2G - Got to go", "CU - See you", "CYA - See you", "ASAP - As soon as possible", "BFF - Best friends forever", "ILY - I love you", "ILU - I love you", "ILYSM - I love you so much", "ILY2 - I love you too", "XOXO - Hugs and kisses", "NP - No problem", "NVM - Never mind", "JK - Just kidding", "RN - Right now", "IRL - In real life", "TMI - Too much information", "FOMO - Fear of missing out", "YOLO - You only live once", "BAE - Before anyone else / partner", "DM - Direct message", "PM - Private message", "ICYMI - In case you missed it", "OOTD - Outfit of the day", "TBT - Throwback Thursday", "AMA - Ask me anything", "NSFW - Not safe for work", "AFK - Away from keyboard", "GG - Good game", "GLHF - Good luck have fun", "TY - Thank you", "TYSM - Thank you so much", "THX - Thanks", "PLS - Please", "PLZ - Please", "WTF - What the heck", "WTH - What the heck", "WYD - What are you doing", "WYA - Where you at", "SUP - What's up", "HBU - How about you", "NM - Not much", "K - Okay", "KK - Okay okay", "BRO - Friend or buddy", "DUDE - Friend", "LIT - Very exciting or amazing", "FIRE - Excellent or very good", "GOAT - Greatest of all time", "SUS - Suspicious", "CAP - Lie or fake", "NO CAP - Not lying / serious", "MID - Average / not impressive", "SALTY - Annoyed or bitter", "CRINGE - Embarrassing", "SAVAGE - Bold response", "SLAY - Doing something extremely well", "ICONIC - Legendary or memorable", "W - Win", "L - Loss", "RIZZ - Charisma or flirting ability", "BET - Agreement or okay", "FR - For real", "ONG - On God / serious", "ISTG - I swear to God", "SMTH - Something", "SMBDY - Somebody", "BC - Because", "CUZ - Because", "COS - Because", "B4 - Before", "GR8 - Great", "M8 - Mate", "L8R - Later", "2DAY - Today", "2MORO - Tomorrow", "4U - For you", "B4N - Bye for now", "HAND - Have a nice day", "GM - Good morning", "GN - Good night", "GA - Good afternoon", "TC - Take care", "BDAY - Birthday", "HBD - Happy birthday", "CONGRATS - Congratulations", "GRATS - Congratulations", "OMW - On my way", "ETA - Estimated time of arrival", "WBU - What about you", "FAM - Close friends or family", "SQUAD - Group of friends", "STAN - Obsessive fan", "FLEX - Show off", "HYPE - Excitement or promotion", "DRIP - Stylish fashion", "LOWKEY - Secretly or subtly", "HIGHKEY - Openly or strongly", "MOOD - Relatable feeling", "VIBE - Atmosphere or feeling", "BIG MOOD - Very relatable feeling", "SHOOK - Shocked", "DEAD - Something extremely funny", "SKSK - Expression of laughter or excitement", "AND I OOP - Expression of surprise"]
-
-df = pd.read_csv("dataset.csv")
+slang_dict = {item.split(" - ")[0]: item.split(" - ")[1] for item in slang_list}
+print(slang_dict)
 
 def normalize_slang(text):
-    words = text.split()
-    normalized = [slang_list.get(word.lower(), word) for word in words]
-    return " ".join(normalized)
+    new_text = []
+    for w in text.split():
+      if w.upper() in slang_dict:
+        new_text.append(slang_dict[w.upper()])
+      else:
+        new_text.append(w)
 
-#for text
-print(normalize_slang(para))
-#for dataset
-df["column"] = df["column"].apply(normalize_slang)
+    return " ".join(new_text)
 
+df["content"] = df["content"].apply(normalize_slang)
+df.head(1)
+
+
+###For Spelling Correction
+from textblob import TextBlob
+spel="""I realy dont know why this resturant is so populer. The food was actualy prety good but the servis was terrble and the waitor forgot our order twice. My freind said the place is usualy amazng, but today it felt kind of disapointing. Maybe we just came on a bad day becuase many peple online gave it good reveiws. I hope next time the experiance will be much beter.
+"""
+textblob_spel = TextBlob(spel)
+textblob_spel.correct().string
