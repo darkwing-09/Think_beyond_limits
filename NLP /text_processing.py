@@ -1,6 +1,8 @@
 import re
 import pandas as pd
 import string , time
+import json
+import pandas as pd
 
 def html_tag_rem(text):
     pattern=re.compile('<.*?>')
@@ -78,24 +80,31 @@ Have you ever wondered how the internet works? Well, it’s a combination of
 protocols, servers, and billions of lines of code! Programming languages 
 like Python, Java, and JavaScript help developers build applications, 
 solve problems, and innovate continuously. Remember: practice, patience, 
-and persistence are key to mastering programming.
+and persistence are key to mastering programming.ASAP do the shuff and btw how are you ?
 </p>
 
 """
-
-rem_pun(para)
+start1=time.time()
+print(rem_pun(para))
+time1=time.time()-start1
 
 df=pd.read_csv('data.csv') # reading the data set using pandas
 df['column_name']=df['column_name'].apply(rem_pun) # where df is the file which is being read by pandas and column
 
 #The above fun is slightly slow if we compare to the down below
+
 def rem_pun1(text):
   return text.translate(str.maketrans('','',remove))
 
+start2=time.time()
+print(rem_pun1(para))
+time2=time.time()-start2
+
+#for time comparison 
+print((time2/time1)*1000)
 
 #for i.pynb file 
-import json
-import pandas as pd
+
 
 with open("data.ipynb") as f:
     notebook = json.load(f)
@@ -110,5 +119,21 @@ for cell in notebook["cells"]:
 
 df = pd.DataFrame(cells)
 df.to_csv("notebook_content.csv", index=False)
-#print(df)
+#print(df)   #for Checking the data set you used thsat either the changes have been reverted or not
+
+
+#for the Slangs used in during the conversation 
+slang_list = ["LOL - Laughing out loud", "LMAO - Laughing my ass off", "ROFL - Rolling on the floor laughing", "LMFAO - Laughing my freaking ass off", "BRB - Be right back", "BTW - By the way", "FYI - For your information", "IDK - I don't know", "IDC - I don't care", "IMO - In my opinion", "IMHO - In my humble opinion", "TBH - To be honest", "TBF - To be fair", "SMH - Shaking my head", "OMG - Oh my God", "OMFG - Oh my freaking God", "IKR - I know right", "TTYL - Talk to you later", "GTG - Got to go", "G2G - Got to go", "CU - See you", "CYA - See you", "ASAP - As soon as possible", "BFF - Best friends forever", "ILY - I love you", "ILU - I love you", "ILYSM - I love you so much", "ILY2 - I love you too", "XOXO - Hugs and kisses", "NP - No problem", "NVM - Never mind", "JK - Just kidding", "RN - Right now", "IRL - In real life", "TMI - Too much information", "FOMO - Fear of missing out", "YOLO - You only live once", "BAE - Before anyone else / partner", "DM - Direct message", "PM - Private message", "ICYMI - In case you missed it", "OOTD - Outfit of the day", "TBT - Throwback Thursday", "AMA - Ask me anything", "NSFW - Not safe for work", "AFK - Away from keyboard", "GG - Good game", "GLHF - Good luck have fun", "TY - Thank you", "TYSM - Thank you so much", "THX - Thanks", "PLS - Please", "PLZ - Please", "WTF - What the heck", "WTH - What the heck", "WYD - What are you doing", "WYA - Where you at", "SUP - What's up", "HBU - How about you", "NM - Not much", "K - Okay", "KK - Okay okay", "BRO - Friend or buddy", "DUDE - Friend", "LIT - Very exciting or amazing", "FIRE - Excellent or very good", "GOAT - Greatest of all time", "SUS - Suspicious", "CAP - Lie or fake", "NO CAP - Not lying / serious", "MID - Average / not impressive", "SALTY - Annoyed or bitter", "CRINGE - Embarrassing", "SAVAGE - Bold response", "SLAY - Doing something extremely well", "ICONIC - Legendary or memorable", "W - Win", "L - Loss", "RIZZ - Charisma or flirting ability", "BET - Agreement or okay", "FR - For real", "ONG - On God / serious", "ISTG - I swear to God", "SMTH - Something", "SMBDY - Somebody", "BC - Because", "CUZ - Because", "COS - Because", "B4 - Before", "GR8 - Great", "M8 - Mate", "L8R - Later", "2DAY - Today", "2MORO - Tomorrow", "4U - For you", "B4N - Bye for now", "HAND - Have a nice day", "GM - Good morning", "GN - Good night", "GA - Good afternoon", "TC - Take care", "BDAY - Birthday", "HBD - Happy birthday", "CONGRATS - Congratulations", "GRATS - Congratulations", "OMW - On my way", "ETA - Estimated time of arrival", "WBU - What about you", "FAM - Close friends or family", "SQUAD - Group of friends", "STAN - Obsessive fan", "FLEX - Show off", "HYPE - Excitement or promotion", "DRIP - Stylish fashion", "LOWKEY - Secretly or subtly", "HIGHKEY - Openly or strongly", "MOOD - Relatable feeling", "VIBE - Atmosphere or feeling", "BIG MOOD - Very relatable feeling", "SHOOK - Shocked", "DEAD - Something extremely funny", "SKSK - Expression of laughter or excitement", "AND I OOP - Expression of surprise"]
+
+df = pd.read_csv("dataset.csv")
+
+def normalize_slang(text):
+    words = text.split()
+    normalized = [slang_list.get(word.lower(), word) for word in words]
+    return " ".join(normalized)
+
+#for text
+print(normalize_slang(para))
+#for dataset
+df["column"] = df["column"].apply(normalize_slang)
 
