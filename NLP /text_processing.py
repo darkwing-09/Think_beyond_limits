@@ -2,7 +2,6 @@ import re
 import pandas as pd
 import string , time
 import json
-import pandas as pd
 
 def html_tag_rem(text):
     pattern=re.compile('<.*?>')
