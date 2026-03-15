@@ -269,7 +269,7 @@ for token in doc1:
 #PORTER STEMMER AND SNOWBALL STEMMER 
 
 #STEMMING - IF YOU WAN TO SHOW RESULTS TO USER AND SPEED MATTERS
-#LEMITIZATION - IF YOU WANT TO SHOW RESULT TO USER AND SPEED DOES NOT MATTER
+#LEMMAITIZATION - IF YOU WANT TO SHOW RESULT TO USER AND SPEED DOES NOT MATTER
 
 #stemming with porter 
 from nltk.stem.porter import PorterStemmer
@@ -303,3 +303,31 @@ sn = [snowball.stem(word) for word in tokens]
 print(sn)
 
 
+#LEMMAITIZATION - citation form of word ( root word )  called lemma 
+
+import nltk
+import nltk
+nltk.download('wordnet')
+from nltk.stem import WordNetLemmatizer
+wordnet_lemmatizer = WordNetLemmatizer()
+
+sentence="""The striped bats are hanging on their feet for best. 
+They were running faster than the other animals and studies were being conducted carefully."""
+punctuation=",.[]{}/\=_*"
+sentence_words=word_tokenize(sentence)
+for word in sentence_words:
+  if word in punctuation:
+    sentence_words.remove(word)
+sentence_words
+
+print("{0:20}{1:20}".format("Word","Lemma"))
+for word in sentence_words:
+  print("{0:20}{1:20}".format(word,wordnet_lemmatizer.lemmatize(word,pos=('v'))))
+
+#Text Preprocessing Ended Here 
+
+
+
+#links to create dataset
+# https://api.themoviedb.org/3/movie/top_rated?api_key=8265bd1679663a7ea12ac168da84d2e8&language=en-US&page=471
+# https://api.themoviedb.org/3/genre/movie/list?api_key=8265bd1679663a7ea12ac168da84d2e8&language=en-US
