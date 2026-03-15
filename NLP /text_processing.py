@@ -256,11 +256,50 @@ Let's see how well this tokenizer handles punctuation, numbers, and contractions
 word_tokenize(text)   #Fine but for tokenization we have to strive a lot for our results 
 
 
-##Tokenization By spaCy
+##Tokenization By spaCy(BEST FOR TOKENIZATION)
 import spacy 
 nlp=spacy.load('en_core_web_sm')
 doc1=nlp(text)
 doc1
 for token in doc1:
   print(token.text)
+
+
+#STEMMING (REDUCING INFLECTION)
+#PORTER STEMMER AND SNOWBALL STEMMER 
+
+#STEMMING - IF YOU WAN TO SHOW RESULTS TO USER AND SPEED MATTERS
+#LEMITIZATION - IF YOU WANT TO SHOW RESULT TO USER AND SPEED DOES NOT MATTER
+
+#stemming with porter 
+from nltk.stem.porter import PorterStemmer
+porter=PorterStemmer()
+
+def stem_words(text):
+  return " ".join([porter.stem(word) for word in word_tokenize(text)])
+text="""The quick brown fox jumps over the lazy dog.
+AI is changing the world rapidly.
+Tokenization splits text into smaller units called tokens."""
+stem_words(text)
+
+
+#stemming by snowball
+from nltk.stem.porter import PorterStemmer
+from nltk.tokenize import word_tokenize
+porter=PorterStemmer()
+
+def stem_words(text):
+  return " ".join([porter.stem(word) for word in word_tokenize(text)])
+text="""The quick brown fox jumps over the lazy dog.
+AI is changing the world rapidly.
+Tokenization splits text into smaller units called tokens."""
+stem_words(text)
+
+
+snowball=SnowballStemmer("english")
+snowball.stem(text)
+tokens = word_tokenize(text)
+sn = [snowball.stem(word) for word in tokens]
+print(sn)
+
 
