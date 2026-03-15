@@ -242,3 +242,25 @@ text = "I love NLP 😂🔥"
 converted = emoji.demojize(text)
 
 print(converted)
+
+##Tokenization By NLTK 
+import nltk
+from nltk.tokenize import word_tokenize
+nltk.download('punkt_tab')
+text="""Hello! My name is Varun. I'm testing tokenization in NLP systems. 
+Email: example@test.com 
+Website: https://example.com
+Price: $25.99
+Date: 15/03/2026
+Let's see how well this tokenizer handles punctuation, numbers, and contractions."""
+word_tokenize(text)   #Fine but for tokenization we have to strive a lot for our results 
+
+
+##Tokenization By spaCy
+import spacy 
+nlp=spacy.load('en_core_web_sm')
+doc1=nlp(text)
+doc1
+for token in doc1:
+  print(token.text)
+
