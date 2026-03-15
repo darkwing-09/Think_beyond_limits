@@ -88,6 +88,27 @@ rem_pun(para)
 df=pd.read_csv('data.csv') # reading the data set using pandas
 df['column_name']=df['column_name'].apply(rem_pun) # where df is the file which is being read by pandas and column
 
-#The above fun is slightly slow if we compare to old one 
+#The above fun is slightly slow if we compare to the down below
 def rem_pun1(text):
   return text.translate(str.maketrans('','',remove))
+
+
+#for i.pynb file 
+import json
+import pandas as pd
+
+with open("data.ipynb") as f:
+    notebook = json.load(f)
+
+cells = []
+
+for cell in notebook["cells"]:
+    cells.append({
+        "cell_type": cell["cell_type"],
+        "content": "".join(cell["source"])
+    })
+
+df = pd.DataFrame(cells)
+df.to_csv("notebook_content.csv", index=False)
+#print(df)
+
