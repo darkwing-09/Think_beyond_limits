@@ -199,3 +199,46 @@ def stop_words(text):
 textt="This is a simple example of a paragraph that contains many common words which are often removed during natural language processing. In this text, we are using words like the, is, at, which, on, and for because these words usually do not carry strong meaning in a sentence. When we build an NLP model, we often remove these words so that the model can focus on the more important terms and extract useful information from the data."
 punc_re=rem_pun(textt)
 print(stop_words(punc_re))
+
+
+##For Emoji removal and decomile them
+#for removal
+import re
+def remove_emoji(text):
+  emoji_pattern = re.compile(
+"["
+"\U0001F600-\U0001F64F"  # emoticons
+"\U0001F300-\U0001F5FF"  # symbols & pictographs
+"\U0001F680-\U0001F6FF"  # transport & map symbols
+"\U0001F700-\U0001F77F"  # alchemical symbols
+"\U0001F780-\U0001F7FF"  # geometric shapes extended
+"\U0001F800-\U0001F8FF"  # supplemental arrows
+"\U0001F900-\U0001F9FF"  # supplemental symbols & pictographs
+"\U0001FA00-\U0001FA6F"  # chess symbols
+"\U0001FA70-\U0001FAFF"  # symbols & pictographs extended
+"\U00002702-\U000027B0"  # dingbats
+"\U000024C2-\U0001F251"
+"]+", flags=re.UNICODE) 
+  return emoji_pattern.sub(r'', text)
+text = "I love NLP 😂🔥🚀 but sometimes it is hard 😅"
+print(remove_emoji(text))
+
+#OR
+!pip install emoji
+import emoji
+
+
+text = "I love NLP 😂🔥🚀 and Python ❤️"
+
+clean_text = emoji.replace_emoji(text, replace='')
+
+print(clean_text)
+
+#for decompile 
+import emoji
+
+text = "I love NLP 😂🔥"
+
+converted = emoji.demojize(text)
+
+print(converted)
