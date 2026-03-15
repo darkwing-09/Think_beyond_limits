@@ -141,9 +141,61 @@ df["content"] = df["content"].apply(normalize_slang)
 df.head(1)
 
 
-###For Spelling Correction
+###For Spelling Correction By TextBlob
 from textblob import TextBlob
 spel="""I realy dont know why this resturant is so populer. The food was actualy prety good but the servis was terrble and the waitor forgot our order twice. My freind said the place is usualy amazng, but today it felt kind of disapointing. Maybe we just came on a bad day becuase many peple online gave it good reveiws. I hope next time the experiance will be much beter.
 """
 textblob_spel = TextBlob(spel)
 textblob_spel.correct().string
+
+#By Spell Checker
+
+from spellchecker import SpellChecker
+
+spell = SpellChecker()
+
+text = "I realy dont like Bansal collge"
+
+corrected_text = []
+
+for word in text.split():
+    corrected_text.append(spell.correction(word))
+
+print(" ".join(corrected_text))
+
+#For Stop word removing 
+import nltk
+import string
+remove=string.punctuation
+print(remove)
+
+def rem_pun(text):
+  for char in remove:
+    text=text.replace(char,"")
+  return text
+
+
+nltk.download('stopwords')
+stopword=stopwords.words('english')
+print(stopword)
+para=[]
+def stop_words(text):
+  for word in text.split():
+    if word in stopword:
+      para.append('')
+    elif word.isdigit():
+      para.append('')
+    elif word.lower() in stopword:
+      para.append('')
+    elif word.title() in stopword:
+      para.append('')
+  
+    else:
+      para.append(word)
+  x=para[:]
+  para.clear()
+  return " ".join(x)
+
+textt="This is a simple example of a paragraph that contains many common words which are often removed during natural language processing. In this text, we are using words like the, is, at, which, on, and for because these words usually do not carry strong meaning in a sentence. When we build an NLP model, we often remove these words so that the model can focus on the more important terms and extract useful information from the data."
+punc_re=rem_pun(textt)
+print(stop_words(punc_re))
