@@ -94,3 +94,37 @@ print(cv.vocabulary_)   # Removes stopword
 print(bow[0].toarray())
 print(bow[1].toarray())
 print(bow[2].toarray())
+
+
+# Advantage - fix sized array when new word arrives , Fix Size 
+#disadvantage - OOV is ignored , sparsity ,order is missed 
+#eg I am a good boy 
+#eg I am not a good boy
+#according to BOW the frequency is same then the meaning is same as well where as they convey opposite meaning
+
+
+
+##NGRAMS or BAg oF Ngrams 
+# In this technique you take 2 or more than 2 words at one go as one word of vocab , and make a vector of it
+#class sklearn.feature_extraction.text.CountVectorizer(*, input='content', encoding='utf-8', decode_error='strict', strip_accents=None, lowercase=True, preprocessor=None, tokenizer=None, stop_words=None, token_pattern='(?u)\\b\\w\\w+\\b', ngram_range=(1, 1), analyzer='word', max_df=1.0, min_df=1, max_features=None, vocabulary=None, binary=False, dtype=<class 'numpy.int64'>)
+# here the ngram_range=(1, 1) is just changed 
+#for Bi grams  on the same dataset above
+from sklearn.feature_extraction.text import CountVectorizer
+cv = CountVectorizer(ngram_range=(2,2))
+bow=cv.fit_transform(df['text'])
+print(cv.vocabulary_)
+print(bow[0].toarray())
+print(bow[1].toarray())
+print(bow[2].toarray())
+
+#for trigrams 
+cv = CountVectorizer(ngram_range=(3,3))
+#for quadgrams 
+cv = CountVectorizer(ngram_range=(4,4))
+
+
+# to include all 
+cv = CountVectorizer(ngram_range=(1,5))
+print(cv.vocabulary_)
+# when cv = CountVectorizer(ngram_range=(n,n)) where n is greater than total number of words in a document 
+#empty vocabulary; perhaps the documents only contain stop words
