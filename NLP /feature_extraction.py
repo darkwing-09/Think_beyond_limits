@@ -128,3 +128,14 @@ cv = CountVectorizer(ngram_range=(1,5))
 print(cv.vocabulary_)
 # when cv = CountVectorizer(ngram_range=(n,n)) where n is greater than total number of words in a document 
 #empty vocabulary; perhaps the documents only contain stop words
+
+
+##Core - In this the more big the n is the more vectors go away from each other and this gives a way to compare them more precisely
+#Advantage - sementic meaning , order , size 
+#Disadvantages - Slows down as n (increases)
+
+
+
+#TD-IDF -
+#TF- term frequency 
+#IDF -Inverse document frequency
