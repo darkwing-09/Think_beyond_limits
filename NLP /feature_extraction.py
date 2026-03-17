@@ -38,3 +38,4 @@ doc_id,document
 'was','want','where','with','working']"""
 #words = 52
 
+##One Hot Coding
