@@ -139,3 +139,15 @@ print(cv.vocabulary_)
 #TD-IDF -
 #TF- term frequency 
 #IDF -Inverse document frequency
+
+tf(t,d)=(number of occurence of term t in document d)/(no of terms in document d)
+idf(dt=loge((total number of document in corpus)/(number of document with term t in them)) + 1 # so that one with 0 idf is not ignored 
+
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+tfidf = TfidfVectorizer()
+bow=tfidf.fit_transform(df['text']).toarray()
+print(bow)
+print(tfidf.vocabulary_)
+print(tfidf.idf_)
+print(tfidf.get_feature_names_out())
