@@ -61,3 +61,16 @@ model.build_vocab(words)
 model.train(words,total_examples=model.corpus_count,epochs=100)
 model.wv.most_similar('king')
 model.wv['king']
+
+
+#color matching
+model.wv.get_normed_vectors().shape
+y=model.wv.index_to_key
+len(y)
+from sklearn.decomposition import PCA
+pca=PCA(n_components=3)
+x=pca.fit_transform(model.wv.get_normed_vectors())
+x.shape
+import plotly.express as px
+fig=px.scatter_3d(x[:500],x=0,y=1,z=2,color=y[:500])
+fig
