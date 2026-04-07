@@ -327,6 +327,8 @@ for word in sentence_words:
 
 
 
-#links to create dataset
+#links to create dataset , Use links to make your own dataset and model
 # https://api.themoviedb.org/3/movie/top_rated?api_key=8265bd1679663a7ea12ac168da84d2e8&language=en-US&page=471
 # https://api.themoviedb.org/3/genre/movie/list?api_key=8265bd1679663a7ea12ac168da84d2e8&language=en-US
+
+
